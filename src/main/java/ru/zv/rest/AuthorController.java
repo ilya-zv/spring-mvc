@@ -1,5 +1,6 @@
 package ru.zv.rest;
 
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,17 +24,18 @@ public class AuthorController {
     }
 
     @GetMapping("/edit")
-    public String editPage(@RequestParam("id") Long id, Model model) {
-        Author author = authorService.findById(id).orElseThrow(NullPointerException::new);
+    public String updatePage(@RequestParam("id") Long id, Model model) {
+        Author author = authorService.findById(id).orElseThrow(NotFoundException::new);
         model.addAttribute("author", author);
         return "edit";
     }
 
-    @PostMapping("/edit")
-    public String createAuthor(Author author, Model model) {
-        Author saved = authorService.save(author);
-        model.addAttribute(saved);
-        return "edit";
+    @PostMapping ("/edit")
+    public String updateAuthor(Author author, Model model) {
+        System.out.println(author.getAuthorId());
+        System.out.println(author.getAuthorName());
+        authorService.updateNameAuthorById(author.getAuthorId(), author.getAuthorName());
+        return "redirect:/authors";
     }
 
     @GetMapping("/author-create")

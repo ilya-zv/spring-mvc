@@ -25,23 +25,27 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Author> findAll() {
         return authorRepo.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Author> findById(Long authorId) {
         return authorRepo.findById(authorId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Author> findByName(String authorName) {
         return authorRepo.findAuthorByAuthorName(authorName);
     }
 
     @Override
+    @Transactional
     public void updateNameAuthorById(Long authorId, String authorName) {
-
+        authorRepo.updateAuthorNameByAuthorId(authorId, authorName);
     }
 
     @Override

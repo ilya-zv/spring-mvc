@@ -10,6 +10,8 @@ public interface AuthorService {
     List<Author> findAll();
     Optional<Author> findById(Long authorId);
     Optional<Author> findByName(String authorName);
+
+
     void updateNameAuthorById(Long authorId, String authorName);
     void removeAuthorById(Long authorId);
     void removeAuthorByName(String authorName);
