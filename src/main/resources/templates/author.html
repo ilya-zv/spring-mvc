@@ -9,8 +9,10 @@
         }
         .authors, .authors td {
             border: 1px solid lightgray;
-            padding: 5px;
+            padding: 3px;
         }
+        .red  { color: darkred;}
+        .green { color: darkslategrey;}
     </style>
 </head>
 <body>
@@ -25,17 +27,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="author : ${authors}">
+    <tr th:each="author : ${authors}" >
         <td th:text="${author.authorId}">1</td>
         <td th:text="${author.authorName}">Name</td>
         <td>
-            <a href="edit.html" th:href="@{/edit(id=${author.authorId})}">Edit</a>
+            <a href="edit.html" th:href="@{/edit(id=${author.authorId})}" class="green">Edit</a>
         </td>
         <td>
-            <a th:href="@{/author-delete(id=${author.authorId})}">Delete</a>
+            <a th:href="@{/author-delete(id=${author.authorId})}" class="red">Delete</a>
         </td>
     </tr>
-    <p><a href="author-create">Create new author</a></p>
+    <p><a href="author-create" class="green">Create new author</a></p>
     </tbody>
 
 </table>

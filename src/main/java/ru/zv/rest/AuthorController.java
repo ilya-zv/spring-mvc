@@ -2,10 +2,7 @@ package ru.zv.rest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.zv.domain.Author;
 import ru.zv.service.reposervice.AuthorService;
 
@@ -44,8 +41,8 @@ public class AuthorController {
         return "author-create";
     }
 
-    @PostMapping("/author-create")
-    public String createAuthor(Author author) {
+    @RequestMapping(value = "/author-create", method = RequestMethod.POST)
+    public String createAuthor(@ModelAttribute(value = "author") Author author) {
         authorService.save(author);
         return "redirect:/authors";
     }
